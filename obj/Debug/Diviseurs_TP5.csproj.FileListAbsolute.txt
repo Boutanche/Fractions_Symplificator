@@ -1,0 +1,10 @@
+E:\C#\TP\Diviseurs_TP5\bin\Debug\Diviseurs_TP5.exe.config
+E:\C#\TP\Diviseurs_TP5\bin\Debug\Diviseurs_TP5.exe
+E:\C#\TP\Diviseurs_TP5\bin\Debug\Diviseurs_TP5.pdb
+E:\C#\TP\Diviseurs_TP5\obj\Debug\Diviseurs_TP5.csprojAssemblyReference.cache
+E:\C#\TP\Diviseurs_TP5\obj\Debug\Diviseurs_TP5.FormMain.resources
+E:\C#\TP\Diviseurs_TP5\obj\Debug\Diviseurs_TP5.Properties.Resources.resources
+E:\C#\TP\Diviseurs_TP5\obj\Debug\Diviseurs_TP5.csproj.GenerateResource.cache
+E:\C#\TP\Diviseurs_TP5\obj\Debug\Diviseurs_TP5.csproj.CoreCompileInputs.cache
+E:\C#\TP\Diviseurs_TP5\obj\Debug\Diviseurs_TP5.exe
+E:\C#\TP\Diviseurs_TP5\obj\Debug\Diviseurs_TP5.pdb
