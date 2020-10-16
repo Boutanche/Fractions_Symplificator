@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +12,31 @@ namespace Diviseurs_TP5
 {
     public partial class FormMain : Form
     {
+    #region Les constantes
+        //Les textes des MessageBox dans des constantes
+        private const string STRSAISIEINVALIDE = "Saisie invalide";
+        private const string STRSAISIE0 = "Cette valeur doit être différente de 0";
+        private const string STRREDUCTIONIMPOSSIBLE = "Il n'est pas possible de réduire cette fraction.";
+        private const string STRFRACTIONEGAL1 = "Cette fraction = 1.";
+        
+        //Les titre des MessageBox dans des constantes
+        private const string STRTITREERREUR = "Erreur";
+        private const string STRTITREINFORMATION = "Information";
+        
+        //Le texte du TextBox 
+        private const string STRPGCD = "PGDC = ";
+        
+        //Les textes des tooltips
+        private const string STRESTUNDIVISEURDE = " : est un diviseur de ";
+        private const string STRFINTOOLTIP = ".\n";
+        
+        //Le texte empty
+        private const string STREMPTY = "";
+        
+        //String du zero pour vérifier que la fraction ne contienne 
+        private const string STR0 = "0";
+      #endregion
+      
         public FormMain()
         {
             InitializeComponent();
@@ -33,10 +58,10 @@ namespace Diviseurs_TP5
             if (!decimal.TryParse(textBox_Numerateur.Text, out numerateur))
             {
                 // On affiche un message d'erreur à l'utilisateur
-                MessageBox.Show("Saisie invalide", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(STRSAISIEINVALIDE, STRTITREERREUR, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 // On efface le champ de saisie et on se repositionne dessus
-                textBox_Numerateur.Text = "";
+                textBox_Numerateur.Text = STREMPTY;
                 textBox_Numerateur.Focus();
                 return;
             }
@@ -44,13 +69,35 @@ namespace Diviseurs_TP5
             if (!decimal.TryParse(textBox_Denominateur.Text, out denominateur))
             {
                 // On affiche un message d'erreur à l'utilisateur
-                MessageBox.Show("Saisie invalide", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(STRSAISIEINVALIDE, STRTITREERREUR, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 // On efface le champ de saisie et on se repositionne dessus
-                textBox_Denominateur.Text = "";
+                textBox_Denominateur.Text = STREMPTY;
                 textBox_Denominateur.Focus();
                 return;
             }
+            // Est-ce que mon numérateur est égal à 0 ? (cette valeur doit être obligatoirement différente de 0)
+            if (textBox_Numerateur.Text == STR0)
+            {
+                // On affiche un message d'erreur à l'utilisateur
+                MessageBox.Show(STRSAISIE0, STRTITREERREUR, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // On efface le champ de saisie et on se repositionne dessus
+                textBox_Numerateur.Text = STREMPTY;
+                textBox_Numerateur.Focus();
+                return;
+            }
+            if (textBox_Denominateur.Text == STR0)
+            {
+                // On affiche un message d'erreur à l'utilisateur
+                MessageBox.Show(STRSAISIE0, STRTITREERREUR, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // On efface le champ de saisie et on se repositionne dessus
+                textBox_Denominateur.Text = STREMPTY;
+                textBox_Denominateur.Focus();
+                return;
+            }
+            // Est-ce que mon dénominateur est égal à 0 ? (cette valeur doit être obligatoirement différente de 0)
             // Faire les listes des diviseurs : 
             for (int i = 1; i <= numerateur; i++)
             {
@@ -79,32 +126,32 @@ namespace Diviseurs_TP5
             }
 
             int plusGrandDiviseurCommun = ListDiviseurCommun.Last();
-            textBox_PGDC.Text = "PGDC = " + plusGrandDiviseurCommun;
+            textBox_PGDC.Text = STRPGCD + plusGrandDiviseurCommun;
             textBox_ResultNumerateur.Text = Convert.ToString(numerateur / plusGrandDiviseurCommun);
             textBox_ResultDenominateur.Text = Convert.ToString(denominateur / plusGrandDiviseurCommun);
 
             if (plusGrandDiviseurCommun == 1)
             {
-                MessageBox.Show("Il n'est pas possible de réduire cette fraction.");
+                MessageBox.Show(STRREDUCTIONIMPOSSIBLE, STRTITREINFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (numerateur == denominateur)
             {
-                MessageBox.Show("Cette fraction = 1.");
+                MessageBox.Show(STRFRACTIONEGAL1, STRTITREINFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             //foreach (int itemk in ListDiviseurCommun)
             //{
             //    MessageBox.Show("Plus Grand Diviseur Commun : " + itemk);
             //}
-            string bingo = "";
-            string binga = "";
+            string bingo = STREMPTY;
+            string binga = STREMPTY;
             foreach (int iteml in ListDiviseurNumerateur)
             {
-                bingo += iteml + " : est un diviseur de " + numerateur + ".\n";
+                bingo += iteml + STRESTUNDIVISEURDE + numerateur + STRFINTOOLTIP;
             }
             foreach (int itemm in ListDiviseurDenominateur)
             {
-                binga += itemm + " : est un diviseur de " + denominateur + ".\n";
+                binga += itemm + STRESTUNDIVISEURDE + denominateur + STRFINTOOLTIP;
             }
 
             toolTip1.SetToolTip(textBox_ResultNumerateur, bingo);
